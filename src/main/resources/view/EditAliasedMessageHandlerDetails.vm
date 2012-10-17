@@ -1,0 +1,49 @@
+## couple of available navigation helpers
+#set ($modifierKey = $action.browserUtils.getModifierKey())
+#set ($submitAccessKey = $i18n.getText('AUI.form.submit.button.accesskey'))
+#set ($submitTitle = $i18n.getText('AUI.form.submit.button.tooltip', [$submitAccessKey, $modifierKey]))
+#set ($cancelAccessKey = $i18n.getText('AUI.form.cancel.link.accesskey'))
+#set ($cancelTitle = $i18n.getText('AUI.form.cancel.link.tooltip', [$cancelAccessKey, $modifierKey]))
+
+<html>
+	<head>
+		<title>$action.handlerName</title>
+	</head>
+
+	<body>
+		<form class="aui" action="EditAliasedMessageHandlerDetails.jspa" method="POST" name="mailHandlerForm" id="mailHandlerForm">
+			<div class="form-body">
+				<h2>$action.handlerName</h2>
+				<span class="global-errors-location">
+					#if ($action.getHasErrorMessages())
+						#foreach ($error in $action.getFlushedErrorMessages())
+							#AUImessage("error" "" $textutils.htmlEncode(${error}) "" "" "" "false")
+						#end
+					#end
+				</span>
+
+				<input type="hidden" name="atl_token" value="$atl_token">
+				<label for="pattern">$i18n.getText('aliasedmailhandler.pattern')</label>
+				<input type="text" class="text" id="pattern" name="pattern" value="$!textutils.htmlEncode($pattern)">
+				<div class="description">
+					The pattern should be a regular expression containing at
+					least one capture group.  The first capture group is
+					expected to be the project key.  Any additional capture
+					groups are ignored.
+				</div>
+			</div>
+
+			<div class="buttons-container form-footer">
+				<div class="buttons">
+					#if ($action.editing)
+						#set ($addButtonLabel = $i18n.getText('common.words.save'))
+					#else
+						#set ($addButtonLabel = $i18n.getText('common.forms.add'))
+					#end
+					<input id="addButton" type="submit" class="button" value="$!addButtonLabel" accesskey="$submitAccessKey" title="$submitTitle">
+					<a href="IncomingMailServers.jspa" class="cancel" accesskey="$cancelAccessKey" title="$cancelTitle">$i18n.getText("AUI.form.cancel.link.text")</a>
+				</div>
+			</div>
+		</form>
+	</body>
+</html>

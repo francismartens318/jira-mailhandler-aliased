@@ -1,0 +1,20 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+	<message-handler i18n-name-key="aliasedmailhandler.name" key="aliasedmailhandler" class="org.tripside.jira.plugin.mailhandler.aliased.AliasedMessageHandler" add-edit-url="/secure/admin/EditAliasedMessageHandlerDetails!default.jspa" weight="0"/>
+
+	<resource type="i18n" name="i18n" location="org.tripside.jira.plugin.mailhandler.aliased.messages"/>
+
+	<webwork1 key="actions" name="Actions" class="java.lang.Object">
+		<actions>
+			<action name="org.tripside.jira.plugin.mailhandler.aliased.EditAliasedMessageHandlerDetailsWebAction" alias="EditAliasedMessageHandlerDetails" roles-required="admin">
+				<view name="input">/view/EditAliasedMessageHandlerDetails.vm</view>
+				<view name="securitybreach">/secure/views/securitybreach.jsp</view>
+			</action>
+		</actions>
+	</webwork1>
+</atlassian-plugin>
