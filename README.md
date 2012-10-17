@@ -23,5 +23,5 @@ The plugin doesn't do much more than that.  It's a very simple use case
 and a very simple implementation.  Feel free to send me pull requests
 for any enhancements here:
 
-	https://github.com/tripside/jira-mailhandler-aliased
+ * https://github.com/tripside/jira-mailhandler-aliased
 
