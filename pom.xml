@@ -3,6 +3,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <scm>
+        <connection>scm:git:ssh://git@github.com/tripside/jira-mailhandler-aliased</connection>
+        <developerConnection>scm:git:ssh://git@github.com/tripside/jira-mailhandler-aliased</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://github.com/tripside/jira-mailhandler-aliased</url>
+    </scm>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.tripside.jira.plugin.mailhandler.aliased</groupId>
@@ -76,6 +82,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
@@ -94,6 +101,23 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>true</doCheck>
+                    <doUpdate>true</doUpdate>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -101,5 +125,4 @@
         <jira.version>5.0</jira.version>
         <amps.version>4.0</amps.version>
     </properties>
-
 </project>
