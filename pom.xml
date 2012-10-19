@@ -114,6 +114,10 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <format>{0,number}</format>
+                    <items>
+                        <item>buildNumber0</item>
+                    </items>
                     <doCheck>true</doCheck>
                     <doUpdate>true</doUpdate>
                 </configuration>
