@@ -39,11 +39,18 @@ import com.atlassian.jira.util.collect.MapBuilder;
 import com.atlassian.configurable.ObjectConfigurationException;
 import com.atlassian.plugin.PluginAccessor;
 
+import org.apache.log4j.Logger;
+
+import com.google.common.collect.ImmutableMap;
+
 import java.util.Map;
 
 public class EditAliasedMessageHandlerDetailsWebAction extends AbstractEditHandlerDetailsWebAction
 {
+	static final Logger log = Logger.getLogger(EditAliasedMessageHandlerDetailsWebAction.class);
+
 	private String handledEmailAddress;
+	private Boolean restrictRecipient = Boolean.FALSE;
 
 	public EditAliasedMessageHandlerDetailsWebAction (PluginAccessor pluginAccessor)
 	{
@@ -60,18 +67,34 @@ public class EditAliasedMessageHandlerDetailsWebAction extends AbstractEditHandl
 		handledEmailAddress = pattern;
 	}
 
+	public String getRestrictRecipient ()
+	{
+		return restrictRecipient.toString();
+	}
+
+	public void setRestrictRecipient (String value)
+	{
+		restrictRecipient = new Boolean (value);
+	}
+
 	@Override
 	protected void copyServiceSettings (JiraServiceContainer jiraServiceContainer) throws ObjectConfigurationException
 	{
 		final Map <String, String> params = ServiceUtils.getParameterMap(jiraServiceContainer.getProperty(AbstractMessageHandlingService.KEY_HANDLER_PARAMS));
 
 		handledEmailAddress = params.get("pattern");
+		restrictRecipient = new Boolean (params.get("restrict-recipient"));
 	}
 
 	@Override
 	protected Map <String, String> getHandlerParams ()
 	{
-		return MapBuilder.build("pattern", handledEmailAddress);
+		log.warn("getHandlerParams");
+		log.warn("getHandlerParams: restrictRecipient=" + (restrictRecipient ? "true" : "false"));
+		return ImmutableMap.<String, String>builder()
+			.put("pattern",				handledEmailAddress)
+			.put("restrict-recipient",	restrictRecipient.toString())
+			.build();
 	}
 
 	@Override

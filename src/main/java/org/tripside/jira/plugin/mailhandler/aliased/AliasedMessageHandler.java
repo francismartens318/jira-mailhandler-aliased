@@ -71,6 +71,7 @@ public class AliasedMessageHandler implements MessageHandler
 	private final MessageUserProcessor messageUserProcessor;
 
 	public Pattern handledEmailAddressPattern;
+	public boolean restrictRecipient;
 
 	public AliasedMessageHandler (MessageUserProcessor messageUserProcessor)
 	{
@@ -119,6 +120,8 @@ public class AliasedMessageHandler implements MessageHandler
 
 		if (params.containsKey("pattern"))
 			handledEmailAddressPattern = Pattern.compile(params.get("pattern"));
+		if (params.containsKey("restrict-recipient"))
+			restrictRecipient = params.get("restrict-recipient").equals("true");
 	}
 
 	@Override
@@ -126,7 +129,11 @@ public class AliasedMessageHandler implements MessageHandler
 	{
 		log.debug("CALLED handleMessage");
 
-		final Project project = getProjectFromRecipientList(message.getAllRecipients());
+		final Address [] recipients = this.restrictRecipient
+			? message.getRecipients(Message.RecipientType.TO)
+			: message.getAllRecipients();
+
+		final Project project = getProjectFromRecipientList(recipients);
 
 		if (project == null) {
 			log.debug("unable to determine project from message");

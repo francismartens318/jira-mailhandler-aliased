@@ -23,13 +23,26 @@
 				</span>
 
 				<input type="hidden" name="atl_token" value="$atl_token">
-				<label for="pattern">$i18n.getText('aliasedmailhandler.pattern')</label>
-				<input type="text" class="text" id="pattern" name="pattern" value="$!textutils.htmlEncode($pattern)">
-				<div class="description">
-					The pattern should be a regular expression containing at
-					least one capture group.  The first capture group is
-					expected to be the project key.  Any additional capture
-					groups are ignored.
+
+				<div class="field-group">
+					<label for="pattern">$i18n.getText('aliasedmailhandler.pattern')</label>
+					<input type="text" class="text" id="pattern" name="pattern" value="$!textutils.htmlEncode($pattern)">
+					<div class="description">
+						The pattern should be a regular expression containing
+						at least one capture group.  The first capture group is
+						expected to be the project key.  Any additional capture
+						groups are ignored.
+					</div>
+				</div>
+
+				<div class="field-group">
+					<label for="restrict-recipient">$i18n.getText('aliasedmailhandler.restrict-recipient')</label>
+					<input type="checkbox" class="checkbox" id="restrictRecipient" name="restrictRecipient" value="true" #if ($restrictRecipient == "true") checked #end>
+					<div class="description">
+						If this option is selected, only the To header
+						will be checked for valid patterns.  Otherwise,
+						all recipients (To, Cc, and Bcc) will be checked.
+					</div>
 				</div>
 			</div>
 
