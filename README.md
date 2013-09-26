@@ -4,9 +4,9 @@ Aliased Mail Handler
 Background
 ----------
 
-The stock mail handler classes included in JIRA 5.1 aren't capable of
-issue creation across all projects using a single service config.  The
-commercial JEMH plugin is certainly capable, but is overkill for the
+The stock mail handler classes included in JIRA aren't capable of issue
+creation across the set of all projects using a single service config.
+The commercial JEMH plugin is certainly capable, but is overkill for the
 simple case.
 
 Description
