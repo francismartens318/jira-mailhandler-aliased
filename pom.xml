@@ -13,7 +13,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.tripside.jira.plugin.mailhandler.aliased</groupId>
     <artifactId>jira-mailhandler-aliased</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 
     <organization>
         <name>Mike Eldridge</name>
@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>com.atlassian.jira</groupId>
 			<artifactId>jira-mail-plugin</artifactId>
-			<version>${jira.version}</version>
+			<version>${jira.mail.version}</version>
 			<scope>provided</scope>
 		</dependency>
         <dependency>
@@ -126,7 +126,8 @@
     </build>
 
     <properties>
-        <jira.version>5.0</jira.version>
-        <amps.version>4.0</amps.version>
+        <jira.version>6.4</jira.version>
+        <jira.mail.version>6.3.9</jira.mail.version>
+        <amps.version>5.0.4</amps.version>
     </properties>
 </project>
