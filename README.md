@@ -25,7 +25,3 @@ for any enhancements here:
 
  * https://github.com/tripside/jira-mailhandler-aliased
 
-
-
-<iframe href="https://google.com">
-</iframe>
